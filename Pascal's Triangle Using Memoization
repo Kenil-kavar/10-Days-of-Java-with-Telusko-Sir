@@ -1,0 +1,54 @@
+
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Main 
+{
+    public static void main(String[] args) 
+    {
+        int numRows = 5;
+        displayPascalTriangle(numRows);
+    }
+
+    public static void displayPascalTriangle(int numRows) 
+    {
+        Map<String, Integer> memo = new HashMap<>();
+
+        for (int row = 0; row < numRows; row++)
+        {
+            for (int space = numRows - row; space > 1; space--) 
+            {
+                System.out.print("  ");
+            }
+
+            for (int col = 0; col <= row; col++) 
+            {
+                int element = getPascalValue(row, col, memo);
+                System.out.printf("%4d", element);
+            }
+
+            System.out.println();
+        }
+    }
+
+    public static int getPascalValue(int row, int col, Map<String, Integer> memo)
+    {
+        String key = row + "," + col;
+
+        if (memo.containsKey(key))
+        {
+            return memo.get(key);
+        }
+
+        if (col == 0 || col == row)
+        {
+            memo.put(key, 1);
+            return 1;
+        } else {
+            int value = getPascalValue(row - 1, col - 1, memo) + getPascalValue(row - 1, col, memo);
+            memo.put(key, value);
+            return value;
+        }
+    }
+}
