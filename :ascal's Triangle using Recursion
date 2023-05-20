@@ -1,0 +1,37 @@
+public class Main
+{
+    public static void main(String[] args)
+    {
+        int numRows = 5;
+        passrows(numRows);
+    }
+
+    public static void passrows(int numRows)
+    {
+        for (int row = 0; row < numRows; row++)
+        {
+            for (int space = numRows - row; space > 1; space--)
+            {
+                System.out.print("  ");
+            }
+
+            for (int col = 0; col <= row; col++)
+            {
+                int element = getPascalValue(row, col);
+                System.out.printf("%4d", element);
+            }
+
+            System.out.println();
+        }
+    }
+
+    public static int getPascalValue(int row, int col)
+    {
+        if (col == 0 || col == row)
+        {
+            return 1;
+        } else {
+            return getPascalValue(row - 1, col - 1) + getPascalValue(row - 1, col) ;
+        }
+    }
+}
